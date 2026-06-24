@@ -78,13 +78,14 @@
     background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);
     border-bottom:1px solid var(--line)}
   .nav .wrap{display:flex;align-items:center;gap:18px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:680;font-size:19px;letter-spacing:-.025em;color:var(--logo-navy)}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;letter-spacing:-.026em;color:var(--logo-navy)}
   .brand-mark{width:30px;height:30px;flex:none;display:block}
   .brand-mark .cm-c{fill:var(--logo-navy);transition:fill .2s var(--ease)}
   .brand-mark .cm-node{fill:var(--logo-orange)}
   .nav-links{display:flex;align-items:center;gap:4px;margin-left:14px}
   .nav-links a{padding:8px 12px;border-radius:9px;font-size:14.5px;font-weight:550;color:var(--muted);transition:.14s var(--ease)}
   .nav-links a:hover{background:var(--ink-04);color:var(--ink)}
+  .nav-links .m-cta{display:none}
   .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
   .icon-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;color:var(--ink);flex:none;transition:.14s var(--ease)}
   .icon-btn:hover{background:var(--ink-04)}
@@ -248,16 +249,23 @@
     .bridge .wrap{grid-template-columns:1fr;gap:34px}
     .contact-grid{grid-template-columns:1fr;gap:34px}
   }
-  @media(max-width:680px){
-    section{padding:64px 0}
+  @media(max-width:900px){
     .nav-links{display:none}
     .hamburger{display:grid}
+    .nav-right{gap:8px}
+    .nav-right .btn.primary{display:none}
     .nav.open .nav-links{display:flex;position:absolute;top:var(--nav-h);left:0;right:0;flex-direction:column;
-      background:var(--card);border-bottom:1px solid var(--line);padding:12px;gap:4px;margin:0;box-shadow:var(--shadow)}
-    .nav.open .nav-links a{padding:12px}
+      background:var(--card);border-bottom:1px solid var(--line);padding:12px;gap:4px;margin:0;box-shadow:var(--shadow);z-index:40}
+    .nav.open .nav-links a{padding:12px 14px;font-size:15px}
+    .nav.open .nav-links .m-cta{display:block;background:var(--accent);color:var(--accent-ink);text-align:center;font-weight:700;border-radius:10px;margin-top:8px}
+    .nav.open .nav-links .m-cta:hover{background:var(--accent);filter:brightness(1.07)}
+  }
+  @media(max-width:680px){
+    section{padding:64px 0}
     .steps,.feat-grid,.frow{grid-template-columns:1fr}
     .hero .lede{font-size:17px}
-    .nav .brand span.bn{display:inline}
+    footer .wrap{flex-direction:column;align-items:flex-start;gap:12px}
+    footer .fr{margin-left:0}
   }
 </style>
 </head>
@@ -272,6 +280,7 @@
       <a href="#features" data-i18n="nav_features">Funktionen</a>
       <a href="#security" data-i18n="nav_security">Sicherheit</a>
       <a href="#services" data-i18n="nav_services">Für Unternehmen</a>
+      <a href="#contact" class="m-cta" data-i18n="nav_cta">Mit Vertrieb sprechen</a>
     </div>
     <div class="nav-right">
       <div class="lang" role="group" aria-label="Language">
