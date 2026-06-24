@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Impressum — CogniMate</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{
+    --bg:#f6f5f1; --card:#ffffff; --ink:#1c1c1e; --muted:#5f5e5a; --line:rgba(0,0,0,.10); --line-2:rgba(0,0,0,.06);
+    --purple:#EEEDFE; --purple-t:#26215C; --accent:#534AB7; --accent-ink:#fff;
+    --radius:14px; --radius-lg:20px; --nav-h:64px;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.05); --shadow:0 2px 6px rgba(0,0,0,.05), 0 10px 30px rgba(0,0,0,.06);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --logo-navy:#11294A; --logo-orange:#E8703A;
+  }
+  :root[data-theme="dark"]{
+    --bg:#161618; --card:#1f1f22; --ink:#f3f2ee; --muted:#a3a29c; --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.06);
+    --purple:#2c2856; --purple-t:#dcd8fb; --accent:#6c63d8;
+    --shadow:0 2px 6px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.45);
+    --logo-navy:#f3f2ee;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2{margin:0;font-weight:700;letter-spacing:-.022em;line-height:1.2;color:var(--logo-navy)}
+  :focus-visible{outline:none;box-shadow:0 0 0 3px rgba(83,74,183,.35);border-radius:8px}
+
+  .nav{position:sticky;top:0;z-index:50;height:var(--nav-h);display:flex;align-items:center;
+    background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);
+    border-bottom:1px solid var(--line)}
+  .wrap{width:100%;max-width:760px;margin:0 auto;padding:0 24px}
+  .nav .wrap{display:flex;align-items:center;gap:14px;max-width:1140px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;letter-spacing:-.026em;color:var(--logo-navy)}
+  .brand-mark{width:30px;height:30px;flex:none;display:block}
+  .brand-mark .cm-c{fill:var(--logo-navy)} .brand-mark .cm-node{fill:var(--logo-orange)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .back{font-size:14.5px;font-weight:600;color:var(--muted);padding:8px 12px;border-radius:9px}
+  .back:hover{background:rgba(0,0,0,.04);color:var(--ink);text-decoration:none}
+  :root[data-theme="dark"] .back:hover{background:rgba(255,255,255,.06)}
+  .icon-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;color:var(--ink);flex:none}
+  .icon-btn:hover{background:rgba(0,0,0,.04)}
+  .icon-btn svg{width:18px;height:18px}
+
+  main{padding:56px 0 80px}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  h1{font-size:clamp(30px,5vw,42px);letter-spacing:-.03em;margin-bottom:10px}
+  .lede{color:var(--muted);font-size:17px;margin-bottom:40px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:30px 32px;margin-bottom:22px}
+  h2{font-size:19px;margin-bottom:14px}
+  .block{font-size:15.5px}
+  .block p{margin:0 0 3px}
+  dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:9px 22px}
+  dt{color:var(--muted);font-size:14.5px}
+  dd{margin:0;font-size:15.5px}
+  .note{background:var(--purple);color:var(--purple-t);border-radius:var(--radius);padding:16px 18px;font-size:15px;margin-bottom:22px}
+  .legal h2{font-size:17px;margin-top:22px}
+  .legal h2:first-child{margin-top:0}
+  .legal p{color:var(--muted);font-size:14.5px;margin:0 0 14px}
+  .legal{margin-top:8px}
+
+  footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;max-width:1140px}
+  footer .brand{font-size:16px}
+  footer .brand-mark{width:24px;height:24px}
+  footer .fr{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
+  footer a{color:var(--muted)} footer a:hover{color:var(--ink);text-decoration:none}
+
+  @media(max-width:680px){
+    .card{padding:22px 20px}
+    dl{grid-template-columns:1fr;gap:2px 0}
+    dt{margin-top:10px}
+    footer .wrap{flex-direction:column;align-items:flex-start;gap:12px}
+    footer .fr{margin-left:0}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="/" class="brand"><svg class="brand-mark" viewBox="0 0 89.91 91.04" role="img" aria-label="CogniMate"><path class="cm-c" d="M69.68,57.69c-4.46,8.82-13.61,14.89-24.16,14.89-14.92,0-27.06-12.14-27.06-27.06s12.14-27.06,27.06-27.06c10.54,0,19.69,6.07,24.16,14.89,2.96-2.74,6.91-4.43,11.25-4.43,2.77,0,5.38.69,7.67,1.89C82.49,12.9,65.52,0,45.52,0,20.38,0,0,20.38,0,45.52s20.38,45.52,45.52,45.52c19.99,0,36.97-12.9,43.08-30.82-2.3,1.2-4.9,1.89-7.67,1.89-4.34,0-8.29-1.69-11.25-4.43Z"/><path class="cm-node" d="M80.93,36.55c-3.84,0-7.12,2.43-8.4,5.83h-7.85c-1.51-9.22-9.51-16.29-19.16-16.29-10.72,0-19.44,8.72-19.44,19.44s8.72,19.44,19.44,19.44c9.64,0,17.65-7.07,19.16-16.29h7.85c1.28,3.4,4.55,5.83,8.4,5.83,4.95,0,8.98-4.03,8.98-8.98s-4.03-8.98-8.98-8.98Z"/></svg>CogniMate</a>
+    <div class="nav-right">
+      <a href="/" class="back">← Zur Startseite</a>
+      <button class="icon-btn" id="theme" aria-label="Theme umschalten">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <div class="eyebrow">Rechtliches</div>
+    <h1>Impressum</h1>
+    <p class="lede">Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)</p>
+
+    <div class="note">
+      <strong>CogniMate</strong> ist ein Produkt und eine Marke der CogniCore IT Solutions GmbH.
+    </div>
+
+    <div class="card block">
+      <h2>Diensteanbieter</h2>
+      <p><strong>CogniCore IT Solutions GmbH</strong></p>
+      <p>Im Mediapark 6B</p>
+      <p>50670 Köln</p>
+      <p>Deutschland</p>
+    </div>
+
+    <div class="card">
+      <h2>Vertretung &amp; Registereintrag</h2>
+      <dl>
+        <dt>Geschäftsführer</dt><dd>Dominik Siegers, Michael Lohmar</dd>
+        <dt>Registergericht</dt><dd>Amtsgericht Köln</dd>
+        <dt>Registernummer</dt><dd>HRB 119305</dd>
+        <dt>USt-IdNr. (§ 27a UStG)</dt><dd>DE369763325</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>Kontakt</h2>
+      <dl>
+        <dt>Telefon</dt><dd><a href="tel:+4922165053000">+49 221 6505 3000</a></dd>
+        <dt>E-Mail</dt><dd><a href="mailto:info@cognicore.de">info@cognicore.de</a></dd>
+        <dt>Web</dt><dd><a href="https://cognicore.de" rel="noopener">cognicore.de</a></dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>Redaktionell verantwortlich</h2>
+      <div class="block">
+        <p>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:</p>
+        <p>Dominik Siegers — Anschrift wie oben.</p>
+      </div>
+    </div>
+
+    <div class="card legal">
+      <h2>Verbraucherstreitbeilegung</h2>
+      <p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+      <h2>Haftung für Inhalte</h2>
+      <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.</p>
+
+      <h2>Haftung für Links</h2>
+      <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+
+      <h2>Urheberrecht</h2>
+      <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="/" class="brand"><svg class="brand-mark" viewBox="0 0 89.91 91.04" role="img" aria-label="CogniMate"><path class="cm-c" d="M69.68,57.69c-4.46,8.82-13.61,14.89-24.16,14.89-14.92,0-27.06-12.14-27.06-27.06s12.14-27.06,27.06-27.06c10.54,0,19.69,6.07,24.16,14.89,2.96-2.74,6.91-4.43,11.25-4.43,2.77,0,5.38.69,7.67,1.89C82.49,12.9,65.52,0,45.52,0,20.38,0,0,20.38,0,45.52s20.38,45.52,45.52,45.52c19.99,0,36.97-12.9,43.08-30.82-2.3,1.2-4.9,1.89-7.67,1.89-4.34,0-8.29-1.69-11.25-4.43Z"/><path class="cm-node" d="M80.93,36.55c-3.84,0-7.12,2.43-8.4,5.83h-7.85c-1.51-9.22-9.51-16.29-19.16-16.29-10.72,0-19.44,8.72-19.44,19.44s8.72,19.44,19.44,19.44c9.64,0,17.65-7.07,19.16-16.29h7.85c1.28,3.4,4.55,5.83,8.4,5.83,4.95,0,8.98-4.03,8.98-8.98s-4.03-8.98-8.98-8.98Z"/></svg>CogniMate</a>
+    <span>© 2026 · CogniCore IT Solutions GmbH</span>
+    <div class="fr">
+      <a href="/">Startseite</a>
+      <a href="/impressum.html">Impressum</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const root=document.documentElement;
+  const saved=localStorage.getItem('cm_theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  root.setAttribute('data-theme',saved);
+  document.getElementById('theme').addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next); localStorage.setItem('cm_theme',next);
+  });
+</script>
+</body>
+</html>
