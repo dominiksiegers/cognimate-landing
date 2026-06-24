@@ -6,6 +6,8 @@
 <!-- Solange das Produkt im Aufbau ist: noindex. Zum Launch diese Zeile entfernen. -->
 <meta name="robots" content="noindex">
 <title>CogniMate — Dein persönlicher AI Chief of Staff</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
 <meta name="description" content="CogniMate verdichtet Postfach, Meetings, Kalender und CRM zu konkreten Vorschlägen. Du gibst mit einem Klick frei — es handelt nie ungefragt. EU-gehostet, DSGVO-konform, self-hosted.">
 <meta property="og:title" content="CogniMate — Dein persönlicher AI Chief of Staff">
 <meta property="og:description" content="Verdichten → Vorschlagen → Freigeben → Handeln. Human-in-the-loop, EU-LLM, self-hosted.">
@@ -29,6 +31,7 @@
     --focus-ring:0 0 0 3px rgba(83,74,183,.35);
     --ease:cubic-bezier(.22,.61,.36,1);
     --nav-h:64px;
+    --logo-navy:#11294A; --logo-orange:#E8703A;
   }
   :root[data-theme="dark"]{
     --bg:#161618; --card:#1f1f22; --ink:#f3f2ee; --muted:#a3a29c; --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.06);
@@ -42,6 +45,7 @@
     --ink-04:rgba(255,255,255,.05); --ink-08:rgba(255,255,255,.09);
     --shadow:0 2px 6px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.45);
     --shadow-lg:0 8px 24px rgba(0,0,0,.5), 0 28px 70px rgba(0,0,0,.6);
+    --logo-navy:#f3f2ee;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px)}
@@ -74,9 +78,10 @@
     background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);
     border-bottom:1px solid var(--line)}
   .nav .wrap{display:flex;align-items:center;gap:18px}
-  .brand{display:flex;align-items:center;gap:11px;font-weight:680;font-size:18px;letter-spacing:-.02em}
-  .brand-mark{width:32px;height:32px;border-radius:9px;background:var(--ink);color:var(--bg);
-    display:grid;place-items:center;font-weight:800;font-size:17px;flex:none}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:680;font-size:19px;letter-spacing:-.025em;color:var(--logo-navy)}
+  .brand-mark{width:30px;height:30px;flex:none;display:block}
+  .brand-mark .cm-c{fill:var(--logo-navy);transition:fill .2s var(--ease)}
+  .brand-mark .cm-node{fill:var(--logo-orange)}
   .nav-links{display:flex;align-items:center;gap:4px;margin-left:14px}
   .nav-links a{padding:8px 12px;border-radius:9px;font-size:14.5px;font-weight:550;color:var(--muted);transition:.14s var(--ease)}
   .nav-links a:hover{background:var(--ink-04);color:var(--ink)}
@@ -223,8 +228,8 @@
   /* ---------- footer ---------- */
   footer{padding:46px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
   footer .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-  footer .brand{font-size:16px;color:var(--ink)}
-  footer .brand-mark{width:26px;height:26px;font-size:14px;border-radius:7px}
+  footer .brand{font-size:17px;color:var(--logo-navy)}
+  footer .brand-mark{width:26px;height:26px}
   footer .fr{margin-left:auto;display:flex;gap:20px;flex-wrap:wrap}
   footer a:hover{color:var(--ink)}
 
@@ -261,7 +266,7 @@
 <!-- ===================== NAV ===================== -->
 <nav class="nav" id="nav">
   <div class="wrap">
-    <a href="#top" class="brand"><span class="brand-mark">C</span><span class="bn">CogniMate</span></a>
+    <a href="#top" class="brand"><svg class="brand-mark" viewBox="0 0 89.91 91.04" role="img" aria-label="CogniMate"><path class="cm-c" d="M69.68,57.69c-4.46,8.82-13.61,14.89-24.16,14.89-14.92,0-27.06-12.14-27.06-27.06s12.14-27.06,27.06-27.06c10.54,0,19.69,6.07,24.16,14.89,2.96-2.74,6.91-4.43,11.25-4.43,2.77,0,5.38.69,7.67,1.89C82.49,12.9,65.52,0,45.52,0,20.38,0,0,20.38,0,45.52s20.38,45.52,45.52,45.52c19.99,0,36.97-12.9,43.08-30.82-2.3,1.2-4.9,1.89-7.67,1.89-4.34,0-8.29-1.69-11.25-4.43Z"/><path class="cm-node" d="M80.93,36.55c-3.84,0-7.12,2.43-8.4,5.83h-7.85c-1.51-9.22-9.51-16.29-19.16-16.29-10.72,0-19.44,8.72-19.44,19.44s8.72,19.44,19.44,19.44c9.64,0,17.65-7.07,19.16-16.29h7.85c1.28,3.4,4.55,5.83,8.4,5.83,4.95,0,8.98-4.03,8.98-8.98s-4.03-8.98-8.98-8.98Z"/></svg><span class="bn">CogniMate</span></a>
     <div class="nav-links">
       <a href="#how" data-i18n="nav_how">So funktioniert's</a>
       <a href="#features" data-i18n="nav_features">Funktionen</a>
@@ -539,7 +544,7 @@
 <!-- ===================== FOOTER ===================== -->
 <footer>
   <div class="wrap">
-    <a href="#top" class="brand"><span class="brand-mark">C</span>CogniMate</a>
+    <a href="#top" class="brand"><svg class="brand-mark" viewBox="0 0 89.91 91.04" role="img" aria-label="CogniMate"><path class="cm-c" d="M69.68,57.69c-4.46,8.82-13.61,14.89-24.16,14.89-14.92,0-27.06-12.14-27.06-27.06s12.14-27.06,27.06-27.06c10.54,0,19.69,6.07,24.16,14.89,2.96-2.74,6.91-4.43,11.25-4.43,2.77,0,5.38.69,7.67,1.89C82.49,12.9,65.52,0,45.52,0,20.38,0,0,20.38,0,45.52s20.38,45.52,45.52,45.52c19.99,0,36.97-12.9,43.08-30.82-2.3,1.2-4.9,1.89-7.67,1.89-4.34,0-8.29-1.69-11.25-4.43Z"/><path class="cm-node" d="M80.93,36.55c-3.84,0-7.12,2.43-8.4,5.83h-7.85c-1.51-9.22-9.51-16.29-19.16-16.29-10.72,0-19.44,8.72-19.44,19.44s8.72,19.44,19.44,19.44c9.64,0,17.65-7.07,19.16-16.29h7.85c1.28,3.4,4.55,5.83,8.4,5.83,4.95,0,8.98-4.03,8.98-8.98s-4.03-8.98-8.98-8.98Z"/></svg>CogniMate</a>
     <span data-i18n="ft_copy">© 2026 · Entwickelt von Dominik Siegers</span>
     <div class="fr">
       <a href="#how" data-i18n="nav_how">So funktioniert's</a>
