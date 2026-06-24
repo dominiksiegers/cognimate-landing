@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Solange das Produkt im Aufbau ist: noindex. Zum Launch diese Zeile entfernen. -->
+<meta name="robots" content="noindex">
+<title>CogniMate — Dein persönlicher AI Chief of Staff</title>
+<meta name="description" content="CogniMate verdichtet Postfach, Meetings, Kalender und CRM zu konkreten Vorschlägen. Du gibst mit einem Klick frei — es handelt nie ungefragt. EU-gehostet, DSGVO-konform, self-hosted.">
+<meta property="og:title" content="CogniMate — Dein persönlicher AI Chief of Staff">
+<meta property="og:description" content="Verdichten → Vorschlagen → Freigeben → Handeln. Human-in-the-loop, EU-LLM, self-hosted.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#f6f5f1; --card:#ffffff; --ink:#1c1c1e; --muted:#5f5e5a; --line:rgba(0,0,0,.10);
+    --line-2:rgba(0,0,0,.06);
+    --gray:#F1EFE8; --gray-b:#5F5E5A; --gray-t:#2C2C2A;
+    --purple:#EEEDFE; --purple-b:#534AB7; --purple-t:#26215C;
+    --teal:#E1F5EE; --teal-b:#0F6E56; --teal-t:#04342C;
+    --coral:#FAECE7; --coral-b:#993C1D; --coral-t:#4A1B0C;
+    --blue:#E6F1FB; --blue-b:#185FA5; --blue-t:#042C53;
+    --amber:#FAEEDA; --amber-b:#854F0B; --amber-t:#412402;
+    --accent:#534AB7; --accent-ink:#ffffff;
+    --radius:14px; --radius-sm:10px; --radius-lg:20px;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.05);
+    --shadow:0 2px 6px rgba(0,0,0,.05), 0 10px 30px rgba(0,0,0,.06);
+    --shadow-lg:0 8px 24px rgba(0,0,0,.10), 0 28px 70px rgba(0,0,0,.16);
+    --ink-04:rgba(28,28,30,.045); --ink-08:rgba(28,28,30,.08);
+    --focus-ring:0 0 0 3px rgba(83,74,183,.35);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --nav-h:64px;
+  }
+  :root[data-theme="dark"]{
+    --bg:#161618; --card:#1f1f22; --ink:#f3f2ee; --muted:#a3a29c; --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.06);
+    --gray:#2a2a28; --gray-b:#a9a89f; --gray-t:#e7e6e0;
+    --purple:#2c2856; --purple-b:#a59df0; --purple-t:#dcd8fb;
+    --teal:#0b3a30; --teal-b:#4fc8a1; --teal-t:#abe9d4;
+    --coral:#3d1a0e; --coral-b:#e08763; --coral-t:#f6cdbb;
+    --blue:#0c2c4d; --blue-b:#5fa0e6; --blue-t:#c2dcf7;
+    --amber:#3a2606; --amber-b:#e0a64a; --amber-t:#f7dca9;
+    --accent:#6c63d8; --accent-ink:#fff;
+    --ink-04:rgba(255,255,255,.05); --ink-08:rgba(255,255,255,.09);
+    --shadow:0 2px 6px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.45);
+    --shadow-lg:0 8px 24px rgba(0,0,0,.5), 0 28px 70px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px)}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-size:16px}
+  h1,h2,h3,h4{margin:0;font-weight:650;letter-spacing:-.022em;line-height:1.15}
+  p{margin:0}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer}
+  ::selection{background:var(--purple);color:var(--purple-t)}
+  :focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:8px}
+  .wrap{width:100%;max-width:1140px;margin:0 auto;padding:0 24px}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);
+    border-radius:11px;padding:11px 18px;font-size:15px;font-weight:600;transition:.16s var(--ease);white-space:nowrap}
+  .btn:hover{background:var(--ink-04);transform:translateY(-1px)}
+  .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent;box-shadow:0 6px 18px rgba(83,74,183,.28)}
+  .btn.primary:hover{filter:brightness(1.08);box-shadow:0 10px 26px rgba(83,74,183,.34)}
+  .btn.ghost{border-color:transparent;background:transparent;color:var(--muted)}
+  .btn.ghost:hover{background:var(--ink-04);color:var(--ink)}
+  .btn.lg{padding:14px 24px;font-size:16px}
+  .btn svg{width:17px;height:17px}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;height:var(--nav-h);display:flex;align-items:center;
+    background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);
+    border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;gap:18px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:680;font-size:18px;letter-spacing:-.02em}
+  .brand-mark{width:32px;height:32px;border-radius:9px;background:var(--ink);color:var(--bg);
+    display:grid;place-items:center;font-weight:800;font-size:17px;flex:none}
+  .nav-links{display:flex;align-items:center;gap:4px;margin-left:14px}
+  .nav-links a{padding:8px 12px;border-radius:9px;font-size:14.5px;font-weight:550;color:var(--muted);transition:.14s var(--ease)}
+  .nav-links a:hover{background:var(--ink-04);color:var(--ink)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .icon-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;color:var(--ink);flex:none;transition:.14s var(--ease)}
+  .icon-btn:hover{background:var(--ink-04)}
+  .icon-btn svg{width:18px;height:18px}
+  .lang{display:inline-flex;background:var(--gray);border-radius:999px;padding:3px;gap:2px}
+  .lang button{border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:700;padding:5px 11px;border-radius:999px;transition:.14s var(--ease)}
+  .lang button.on{background:var(--card);color:var(--ink);box-shadow:var(--shadow-sm)}
+  .hamburger{display:none}
+
+  /* ---------- pills / eyebrow ---------- */
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:650;padding:5px 13px;border-radius:999px;white-space:nowrap}
+  .p-purple{background:var(--purple);color:var(--purple-t)} .p-teal{background:var(--teal);color:var(--teal-t)}
+  .p-coral{background:var(--coral);color:var(--coral-t)} .p-blue{background:var(--blue);color:var(--blue-t)}
+  .p-amber{background:var(--amber);color:var(--amber-t)} .p-gray{background:var(--gray);color:var(--gray-t)}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .dot{width:7px;height:7px;border-radius:50%;flex:none}
+
+  /* ---------- sections ---------- */
+  section{padding:88px 0}
+  .sec-head{max-width:640px;margin:0 auto 52px;text-align:center}
+  .sec-head .eyebrow{margin-bottom:14px;display:block}
+  .sec-head h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.03em}
+  .sec-head p{color:var(--muted);font-size:18px;margin-top:16px}
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 64px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:-20% 30% auto -10%;height:560px;z-index:-1;
+    background:radial-gradient(60% 60% at 30% 30%, color-mix(in srgb,var(--purple) 80%, transparent) 0%, transparent 70%);
+    filter:blur(20px);opacity:.7}
+  .hero::after{content:"";position:absolute;inset:-10% -10% auto 50%;height:480px;z-index:-1;
+    background:radial-gradient(55% 55% at 70% 30%, color-mix(in srgb,var(--teal) 70%, transparent) 0%, transparent 70%);
+    filter:blur(20px);opacity:.55}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+  .hero h1{font-size:clamp(34px,5.2vw,58px);letter-spacing:-.035em;line-height:1.04}
+  .hero h1 .grad{background:linear-gradient(115deg,var(--accent),var(--teal-b));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .lede{font-size:19px;color:var(--muted);margin:22px 0 30px;max-width:54ch}
+  .hero .cta-row{display:flex;gap:13px;flex-wrap:wrap}
+  .hero .micro{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;color:var(--muted);font-size:14px}
+  .hero .micro span{display:inline-flex;align-items:center;gap:7px}
+  .hero .micro svg{width:16px;height:16px;color:var(--teal-b)}
+
+  /* product mock */
+  .mock{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden}
+  .mock-top{display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 50%,var(--card))}
+  .mock-top .tl{display:flex;gap:6px}
+  .mock-top .tl i{width:11px;height:11px;border-radius:50%;background:var(--ink-08)}
+  .mock-top .ttl{font-size:13px;font-weight:650;margin-left:8px;color:var(--muted)}
+  .mock-top .agentbadge{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--teal-t);background:var(--teal);padding:3px 9px;border-radius:999px;display:inline-flex;gap:5px;align-items:center}
+  .mock-body{padding:14px}
+  .prop{border:1px solid var(--line);border-radius:13px;padding:14px;margin-bottom:11px;background:var(--card);transition:.2s var(--ease)}
+  .prop:last-child{margin-bottom:0}
+  .prop:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+  .prop .ph{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .prop .av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;flex:none}
+  .prop .nm{font-size:14px;font-weight:680;line-height:1.2}
+  .prop .co{font-size:12px;color:var(--muted)}
+  .prop .conf{margin-left:auto;font-size:11px;font-weight:700;color:var(--teal-t);background:var(--teal);padding:2px 9px;border-radius:999px}
+  .prop .subj{font-size:14px;font-weight:600;margin-bottom:3px}
+  .prop .sum{font-size:13px;color:var(--muted);margin-bottom:11px}
+  .prop .acts{display:flex;gap:7px;flex-wrap:wrap}
+  .mini-btn{font-size:12.5px;font-weight:650;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);transition:.14s var(--ease)}
+  .mini-btn:hover{background:var(--ink-04)}
+  .mini-btn.go{background:var(--accent);color:#fff;border-color:transparent}
+  .mini-btn.go:hover{filter:brightness(1.08)}
+
+  /* ---------- trust strip ---------- */
+  .trust{padding:30px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 40%,var(--card))}
+  .trust .wrap{display:flex;flex-wrap:wrap;gap:14px 36px;align-items:center;justify-content:center}
+  .trust .ti{display:inline-flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:var(--muted)}
+  .trust .ti svg{width:19px;height:19px;color:var(--accent)}
+
+  /* ---------- steps ---------- */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;box-shadow:var(--shadow-sm);position:relative;transition:.2s var(--ease)}
+  .step:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+  .step .num{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:15px;margin-bottom:14px}
+  .step h3{font-size:18px;margin-bottom:7px}
+  .step p{font-size:14.5px;color:var(--muted)}
+
+  /* ---------- features ---------- */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);transition:.2s var(--ease)}
+  .feat:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+  .feat .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px}
+  .feat .ic svg{width:22px;height:22px}
+  .feat h3{font-size:18px;margin-bottom:8px}
+  .feat p{font-size:14.5px;color:var(--muted)}
+
+  /* ---------- security ---------- */
+  .sec-security{background:var(--ink);color:var(--bg)}
+  :root[data-theme="dark"] .sec-security{background:#0e0e10}
+  .sec-security .eyebrow{color:#a59df0}
+  .sec-security h2{color:#fff}
+  .sec-security .lede{color:rgba(255,255,255,.66)}
+  .sec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:42px}
+  .sec-card{border:1px solid rgba(255,255,255,.13);border-radius:var(--radius);padding:24px;background:rgba(255,255,255,.04)}
+  .sec-card .row{display:flex;gap:14px;align-items:flex-start}
+  .sec-card .ic{width:40px;height:40px;border-radius:11px;background:rgba(165,157,240,.16);display:grid;place-items:center;flex:none}
+  .sec-card .ic svg{width:20px;height:20px;color:#a59df0}
+  .sec-card h3{font-size:17px;color:#fff;margin-bottom:5px}
+  .sec-card p{font-size:14px;color:rgba(255,255,255,.62)}
+
+  /* ---------- audience / services bridge ---------- */
+  .bridge .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .bridge .badge-list{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+  .bridge .bl{display:flex;gap:13px;align-items:flex-start}
+  .bridge .bl .ck{width:26px;height:26px;border-radius:8px;background:var(--teal);color:var(--teal-b);display:grid;place-items:center;flex:none}
+  .bridge .bl .ck svg{width:15px;height:15px}
+  .bridge .bl b{font-weight:680}
+  .bridge .bl span{color:var(--muted);font-size:14.5px}
+  .bridge .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow)}
+  .bridge .panel .big{font-size:46px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(115deg,var(--accent),var(--teal-b));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+  .bridge .panel .lbl{color:var(--muted);font-size:14.5px;margin-top:6px;margin-bottom:22px}
+  .bridge .panel hr{border:none;border-top:1px solid var(--line);margin:22px 0}
+
+  /* ---------- contact / form ---------- */
+  .contact{background:color-mix(in srgb,var(--purple) 26%,var(--bg))}
+  :root[data-theme="dark"] .contact{background:color-mix(in srgb,var(--purple) 20%,var(--bg))}
+  .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:54px;align-items:start}
+  .contact h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.03em}
+  .contact .lede{color:var(--muted);font-size:18px;margin-top:16px;max-width:42ch}
+  .contact .reasons{margin-top:28px;display:flex;flex-direction:column;gap:14px}
+  .contact .reasons .r{display:flex;gap:12px;align-items:center;font-size:15px}
+  .contact .reasons .r .d{width:30px;height:30px;border-radius:9px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;flex:none;color:var(--accent)}
+  .contact .reasons .r svg{width:16px;height:16px}
+  form.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow)}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{margin-bottom:15px;display:flex;flex-direction:column;gap:6px}
+  .field label{font-size:13.5px;font-weight:650}
+  .field input,.field textarea{width:100%;font-family:inherit;font-size:15px;color:var(--ink);background:var(--bg);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;transition:.14s var(--ease)}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:var(--focus-ring)}
+  .field textarea{resize:vertical;min-height:108px}
+  .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+  .form-foot{display:flex;align-items:center;gap:14px;margin-top:6px}
+  .form-note{font-size:12.5px;color:var(--muted)}
+  .form-msg{display:none;padding:13px 15px;border-radius:11px;font-size:14px;font-weight:600;margin-top:14px}
+  .form-msg.ok{display:block;background:var(--teal);color:var(--teal-t)}
+  .form-msg.err{display:block;background:var(--coral);color:var(--coral-t)}
+
+  /* ---------- footer ---------- */
+  footer{padding:46px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  footer .brand{font-size:16px;color:var(--ink)}
+  footer .brand-mark{width:26px;height:26px;font-size:14px;border-radius:7px}
+  footer .fr{margin-left:auto;display:flex;gap:20px;flex-wrap:wrap}
+  footer a:hover{color:var(--ink)}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:980px){
+    .hero .wrap{grid-template-columns:1fr;gap:40px}
+    .hero{padding-top:48px}
+    .steps{grid-template-columns:1fr 1fr}
+    .feat-grid{grid-template-columns:1fr 1fr}
+    .sec-grid{grid-template-columns:1fr}
+    .bridge .wrap{grid-template-columns:1fr;gap:34px}
+    .contact-grid{grid-template-columns:1fr;gap:34px}
+  }
+  @media(max-width:680px){
+    section{padding:64px 0}
+    .nav-links{display:none}
+    .hamburger{display:grid}
+    .nav.open .nav-links{display:flex;position:absolute;top:var(--nav-h);left:0;right:0;flex-direction:column;
+      background:var(--card);border-bottom:1px solid var(--line);padding:12px;gap:4px;margin:0;box-shadow:var(--shadow)}
+    .nav.open .nav-links a{padding:12px}
+    .steps,.feat-grid,.frow{grid-template-columns:1fr}
+    .hero .lede{font-size:17px}
+    .nav .brand span.bn{display:inline}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="brand-mark">C</span><span class="bn">CogniMate</span></a>
+    <div class="nav-links">
+      <a href="#how" data-i18n="nav_how">So funktioniert's</a>
+      <a href="#features" data-i18n="nav_features">Funktionen</a>
+      <a href="#security" data-i18n="nav_security">Sicherheit</a>
+      <a href="#services" data-i18n="nav_services">Für Unternehmen</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="de" class="on">DE</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <button class="icon-btn" id="theme" aria-label="Theme umschalten">
+        <svg id="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a href="#contact" class="btn primary" data-i18n="nav_cta">Mit Vertrieb sprechen</a>
+      <button class="icon-btn hamburger" id="ham" aria-label="Menü">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<span id="top"></span>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="reveal in">
+      <span class="pill p-purple" style="margin-bottom:20px;display:inline-flex">● <span data-i18n="hero_pill">Human-in-the-loop · EU-gehostet</span></span>
+      <h1><span data-i18n="hero_h1a">Dein persönlicher</span> <span class="grad" data-i18n="hero_h1b">AI Chief of Staff</span>.</h1>
+      <p class="lede" data-i18n="hero_lede">CogniMate verdichtet Postfach, Meetings, Kalender und CRM zu konkreten Vorschlägen. Du gibst mit einem Klick frei — es handelt nie ungefragt.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn primary lg" data-i18n="hero_cta1">Mit Vertrieb sprechen</a>
+        <a href="#how" class="btn lg" data-i18n="hero_cta2">Wie es funktioniert</a>
+      </div>
+      <div class="micro">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="hero_m1">DSGVO-konform</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="hero_m2">EU-LLM (Mistral)</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="hero_m3">Self-hosted</span></span>
+      </div>
+    </div>
+
+    <!-- product mock -->
+    <div class="reveal in mock" style="transition-delay:.1s">
+      <div class="mock-top">
+        <div class="tl"><i></i><i></i><i></i></div>
+        <span class="ttl" data-i18n="mock_title">Triage — Heute</span>
+        <span class="agentbadge">◆ <span data-i18n="mock_badge">3 Vorschläge</span></span>
+      </div>
+      <div class="mock-body">
+        <div class="prop">
+          <div class="ph">
+            <span class="av p-coral">MR</span>
+            <div><div class="nm">Marie Reinhardt</div><div class="co">Voltaro GmbH</div></div>
+            <span class="conf">94%</span>
+          </div>
+          <div class="subj" data-i18n="mock1_subj">Angebot zur Q3-Roadmap</div>
+          <div class="sum" data-i18n="mock1_sum">Bittet um Rückmeldung bis Freitag. Entwurf vorbereitet — Termin im Kalender frei.</div>
+          <div class="acts">
+            <button class="mini-btn go" data-i18n="mock_approve">Freigeben</button>
+            <button class="mini-btn" data-i18n="mock_edit">Bearbeiten</button>
+            <button class="mini-btn" data-i18n="mock_dismiss">Ablehnen</button>
+          </div>
+        </div>
+        <div class="prop">
+          <div class="ph">
+            <span class="av p-blue">GR</span>
+            <div><div class="nm" data-i18n="mock2_nm">Granola · Meeting</div><div class="co" data-i18n="mock2_co">Sync mit Vertrieb</div></div>
+            <span class="conf">88%</span>
+          </div>
+          <div class="subj" data-i18n="mock2_subj">3 Folgeaufgaben erkannt</div>
+          <div class="sum" data-i18n="mock2_sum">Aus dem Transkript abgeleitet — als Linear-Tickets vorbereitet, dir zugewiesen.</div>
+          <div class="acts">
+            <button class="mini-btn go" data-i18n="mock_approve">Freigeben</button>
+            <button class="mini-btn" data-i18n="mock_review">Prüfen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== TRUST STRIP ===================== -->
+<div class="trust">
+  <div class="wrap">
+    <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-i18n="trust1">Row-Level-Security ab Zeile 1</span></div>
+    <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg><span data-i18n="trust2">Verschlüsselte Tokens</span></div>
+    <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span data-i18n="trust3">EU-Datenresidenz</span></div>
+    <div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span data-i18n="trust4">Output-Render-Lockdown</span></div>
+  </div>
+</div>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="how_eyebrow">Das Rückgrat</span>
+      <h2 data-i18n="how_h2">Verdichten → Vorschlagen → Freigeben → Handeln</h2>
+      <p data-i18n="how_p">Vier Schritte, jeder Tag. CogniMate denkt vor — die Entscheidung bleibt bei dir.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="num p-purple">1</div>
+        <h3 data-i18n="step1_h">Verdichten</h3>
+        <p data-i18n="step1_p">Signale aus Postfach, Meetings, Kalender und CRM laufen zusammen und werden entrauscht.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.06s">
+        <div class="num p-teal">2</div>
+        <h3 data-i18n="step2_h">Vorschlagen</h3>
+        <p data-i18n="step2_p">Aus dem Rauschen werden konkrete Vorschläge: Antwortentwurf, Aufgabe, Termin, Erinnerung.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.12s">
+        <div class="num p-amber">3</div>
+        <h3 data-i18n="step3_h">Freigeben</h3>
+        <p data-i18n="step3_p">Du prüfst und gibst mit einem Klick frei — oder passt an. Volle Kontrolle, jederzeit.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.18s">
+        <div class="num p-blue">4</div>
+        <h3 data-i18n="step4_h">Handeln & Protokollieren</h3>
+        <p data-i18n="step4_p">Erst nach Freigabe wird gehandelt — und jeder Schritt nachvollziehbar protokolliert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section id="features" style="background:color-mix(in srgb,var(--bg) 40%,var(--card));border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="feat_eyebrow">Eine Inbox für alles</span>
+      <h2 data-i18n="feat_h2">Jedes Signal. Eine Oberfläche.</h2>
+      <p data-i18n="feat_p">CogniMate sammelt sechs Quellen in einer einheitlichen Vorschlags-Inbox — statt sechs Tabs.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat reveal">
+        <div class="ic p-coral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+        <h3 data-i18n="f1_h">Postfach-Triage</h3>
+        <p data-i18n="f1_p">Microsoft 365 wird verdichtet: Wichtiges nach oben, Antwortentwürfe inklusive — direkt aus deinem Postfach.</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.05s">
+        <div class="ic p-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.5v9L15 14M3 6h12v12H3z"/></svg></div>
+        <h3 data-i18n="f2_h">Meetings</h3>
+        <p data-i18n="f2_p">Granola-Transkripte werden zu Folgeaufgaben und Zusammenfassungen — nichts geht verloren.</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.1s">
+        <div class="ic p-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <h3 data-i18n="f3_h">Kalender</h3>
+        <p data-i18n="f3_p">Termine im Kontext: CogniMate sieht, wann du Zeit hast, und plant Vorschläge realistisch ein.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic p-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <h3 data-i18n="f4_h">CRM / HubSpot</h3>
+        <p data-i18n="f4_p">Deals und Kontakte als Signal — read-only über den geteilten Connector, keine Doppelablage.</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.05s">
+        <div class="ic p-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div>
+        <h3 data-i18n="f5_h">Aufgaben (Linear)</h3>
+        <p data-i18n="f5_p">Vorschläge werden zu Tickets — der Agent als Delegate, du bleibst Verantwortlicher.</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.1s">
+        <div class="ic p-gray"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+        <h3 data-i18n="f6_h">Erinnerungen</h3>
+        <p data-i18n="f6_p">Fristen und wiederkehrende Pflichten aus dem Team-Cockpit — rechtzeitig, bevor es brennt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECURITY ===================== -->
+<section id="security" class="sec-security">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="sec_eyebrow">Sicherheit ist das Fundament</span>
+      <h2 data-i18n="sec_h2">Gebaut für sensible Postfächer.</h2>
+      <p class="lede" data-i18n="sec_p">Deine Rohdaten verlassen die Box nie. Jede Schicht ist auf Zero-Trust ausgelegt — nicht nachträglich aufgesetzt.</p>
+    </div>
+    <div class="sec-grid">
+      <div class="sec-card reveal">
+        <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div><h3 data-i18n="sc1_h">PII-Strip lokal, vor dem LLM</h3><p data-i18n="sc1_p">Ein lokales EU-Modell klassifiziert und neutralisiert Inhalte. Rohtexte verlassen deinen Server nicht.</p></div></div>
+      </div>
+      <div class="sec-card reveal" style="transition-delay:.05s">
+        <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div><h3 data-i18n="sc2_h">Output-Render-Lockdown</h3><p data-i18n="sc2_p">Schutz gegen Prompt-Injection (EchoLeak-Klasse): Plaintext-Rendering, strikte CSP, kein Auto-Image-Fetch.</p></div></div>
+      </div>
+      <div class="sec-card reveal" style="transition-delay:.1s">
+        <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1l3 5 6 1-4 4 1 6-6-3-6 3 1-6-4-4 6-1z"/></svg></div>
+          <div><h3 data-i18n="sc3_h">Row-Level-Security in Postgres</h3><p data-i18n="sc3_p">Mandanten-Isolation auf Datenbankebene erzwungen — gegen echte DB bewiesen, nicht nur konfiguriert.</p></div></div>
+      </div>
+      <div class="sec-card reveal" style="transition-delay:.15s">
+        <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <div><h3 data-i18n="sc4_h">Self-hosted in der EU</h3><p data-i18n="sc4_p">Eigener gehärteter Server, EU-LLM (Mistral), verschlüsselte Token-Tabelle. Keine US-Cloud im Datenpfad.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES BRIDGE ===================== -->
+<section id="services" class="bridge">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow" data-i18n="brg_eyebrow">Für Unternehmen</span>
+      <h2 style="font-size:clamp(28px,3.6vw,38px);margin-top:14px" data-i18n="brg_h2">Sie wollen so etwas für Ihr Team?</h2>
+      <p style="color:var(--muted);font-size:18px;margin-top:16px;max-width:48ch" data-i18n="brg_p">CogniMate ist unser Referenzprojekt — gebaut, um zu zeigen, was geht. Dieselbe Architektur entwickeln wir maßgeschneidert für Ihre Prozesse, Tools und Compliance.</p>
+      <div class="badge-list">
+        <div class="bl"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b data-i18n="brg_b1t">Maßgeschneidert statt Standard.</b> <span data-i18n="brg_b1">Integration in Ihre bestehende Tool-Landschaft.</span></span></div>
+        <div class="bl"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b data-i18n="brg_b2t">EU & DSGVO im Kern.</b> <span data-i18n="brg_b2">Self-hosting und Datenhoheit ohne Kompromisse.</span></span></div>
+        <div class="bl"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b data-i18n="brg_b3t">Human-in-the-loop by Design.</b> <span data-i18n="brg_b3">KI, die vorschlägt — Menschen, die entscheiden.</span></span></div>
+      </div>
+    </div>
+    <div class="reveal panel" style="transition-delay:.08s">
+      <div class="big" data-i18n="brg_stat1n">6 Quellen</div>
+      <div class="lbl" data-i18n="brg_stat1l">in einer Vorschlags-Inbox vereint</div>
+      <hr>
+      <div class="big" data-i18n="brg_stat2n">1 Klick</div>
+      <div class="lbl" data-i18n="brg_stat2l">von Vorschlag zu erledigter Aufgabe</div>
+      <hr>
+      <div class="big" data-i18n="brg_stat3n">0 Rohdaten</div>
+      <div class="lbl" data-i18n="brg_stat3l">verlassen Ihre Infrastruktur</div>
+      <a href="#contact" class="btn primary lg" style="width:100%;margin-top:26px" data-i18n="brg_cta">Projekt besprechen</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="eyebrow" data-i18n="ct_eyebrow">Kontakt</span>
+        <h2 style="margin-top:14px" data-i18n="ct_h2">Mit Vertrieb sprechen</h2>
+        <p class="lede" data-i18n="ct_p">Erzählen Sie uns kurz von Ihrem Vorhaben. Wir melden uns innerhalb von zwei Werktagen für ein unverbindliches Erstgespräch.</p>
+        <div class="reasons">
+          <div class="r"><span class="d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span data-i18n="ct_r1">Antwort in 2 Werktagen</span></div>
+          <div class="r"><span class="d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span data-i18n="ct_r2">Unverbindliches Erstgespräch</span></div>
+          <div class="r"><span class="d"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg></span><span data-i18n="ct_r3">Vertraulich behandelt</span></div>
+        </div>
+      </div>
+
+      <form class="card" id="contactForm">
+        <!-- WICHTIG: access_key bei web3forms.com (kostenlos, nur E-Mail) holen und hier eintragen -->
+        <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="subject" value="Neue CogniMate-Anfrage über die Landingpage">
+        <input type="hidden" name="from_name" value="CogniMate Landingpage">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+        <div class="frow">
+          <div class="field">
+            <label for="name" data-i18n="ct_f_name">Name</label>
+            <input id="name" name="name" type="text" required data-i18n-placeholder="ct_ph_name" placeholder="Ihr Name">
+          </div>
+          <div class="field">
+            <label for="company" data-i18n="ct_f_company">Unternehmen</label>
+            <input id="company" name="company" type="text" data-i18n-placeholder="ct_ph_company" placeholder="Firma">
+          </div>
+        </div>
+        <div class="field">
+          <label for="email" data-i18n="ct_f_email">E-Mail</label>
+          <input id="email" name="email" type="email" required data-i18n-placeholder="ct_ph_email" placeholder="sie@firma.de">
+        </div>
+        <div class="field">
+          <label for="message" data-i18n="ct_f_msg">Worum geht's?</label>
+          <textarea id="message" name="message" required data-i18n-placeholder="ct_ph_msg" placeholder="Kurz zu Ihrem Vorhaben, Team-Größe, eingesetzten Tools …"></textarea>
+        </div>
+        <div class="form-foot">
+          <button type="submit" class="btn primary lg" id="submitBtn" data-i18n="ct_submit">Anfrage senden</button>
+          <span class="form-note" data-i18n="ct_note">Wir nutzen Ihre Angaben nur zur Kontaktaufnahme.</span>
+        </div>
+        <div class="form-msg" id="formMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="brand-mark">C</span>CogniMate</a>
+    <span data-i18n="ft_copy">© 2026 · Entwickelt von Dominik Siegers</span>
+    <div class="fr">
+      <a href="#how" data-i18n="nav_how">So funktioniert's</a>
+      <a href="#security" data-i18n="nav_security">Sicherheit</a>
+      <a href="#contact" data-i18n="nav_cta">Kontakt</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- i18n ---------- */
+const I18N = {
+  de:{
+    nav_how:"So funktioniert's", nav_features:"Funktionen", nav_security:"Sicherheit", nav_services:"Für Unternehmen", nav_cta:"Mit Vertrieb sprechen",
+    hero_pill:"Human-in-the-loop · EU-gehostet",
+    hero_h1a:"Dein persönlicher", hero_h1b:"AI Chief of Staff",
+    hero_lede:"CogniMate verdichtet Postfach, Meetings, Kalender und CRM zu konkreten Vorschlägen. Du gibst mit einem Klick frei — es handelt nie ungefragt.",
+    hero_cta1:"Mit Vertrieb sprechen", hero_cta2:"Wie es funktioniert",
+    hero_m1:"DSGVO-konform", hero_m2:"EU-LLM (Mistral)", hero_m3:"Self-hosted",
+    mock_title:"Triage — Heute", mock_badge:"3 Vorschläge",
+    mock1_subj:"Angebot zur Q3-Roadmap", mock1_sum:"Bittet um Rückmeldung bis Freitag. Entwurf vorbereitet — Termin im Kalender frei.",
+    mock_approve:"Freigeben", mock_edit:"Bearbeiten", mock_dismiss:"Ablehnen", mock_review:"Prüfen",
+    mock2_nm:"Granola · Meeting", mock2_co:"Sync mit Vertrieb", mock2_subj:"3 Folgeaufgaben erkannt",
+    mock2_sum:"Aus dem Transkript abgeleitet — als Linear-Tickets vorbereitet, dir zugewiesen.",
+    trust1:"Row-Level-Security ab Zeile 1", trust2:"Verschlüsselte Tokens", trust3:"EU-Datenresidenz", trust4:"Output-Render-Lockdown",
+    how_eyebrow:"Das Rückgrat", how_h2:"Verdichten → Vorschlagen → Freigeben → Handeln",
+    how_p:"Vier Schritte, jeden Tag. CogniMate denkt vor — die Entscheidung bleibt bei dir.",
+    step1_h:"Verdichten", step1_p:"Signale aus Postfach, Meetings, Kalender und CRM laufen zusammen und werden entrauscht.",
+    step2_h:"Vorschlagen", step2_p:"Aus dem Rauschen werden konkrete Vorschläge: Antwortentwurf, Aufgabe, Termin, Erinnerung.",
+    step3_h:"Freigeben", step3_p:"Du prüfst und gibst mit einem Klick frei — oder passt an. Volle Kontrolle, jederzeit.",
+    step4_h:"Handeln & Protokollieren", step4_p:"Erst nach Freigabe wird gehandelt — und jeder Schritt nachvollziehbar protokolliert.",
+    feat_eyebrow:"Eine Inbox für alles", feat_h2:"Jedes Signal. Eine Oberfläche.",
+    feat_p:"CogniMate sammelt sechs Quellen in einer einheitlichen Vorschlags-Inbox — statt sechs Tabs.",
+    f1_h:"Postfach-Triage", f1_p:"Microsoft 365 wird verdichtet: Wichtiges nach oben, Antwortentwürfe inklusive — direkt aus deinem Postfach.",
+    f2_h:"Meetings", f2_p:"Granola-Transkripte werden zu Folgeaufgaben und Zusammenfassungen — nichts geht verloren.",
+    f3_h:"Kalender", f3_p:"Termine im Kontext: CogniMate sieht, wann du Zeit hast, und plant Vorschläge realistisch ein.",
+    f4_h:"CRM / HubSpot", f4_p:"Deals und Kontakte als Signal — read-only über den geteilten Connector, keine Doppelablage.",
+    f5_h:"Aufgaben (Linear)", f5_p:"Vorschläge werden zu Tickets — der Agent als Delegate, du bleibst Verantwortlicher.",
+    f6_h:"Erinnerungen", f6_p:"Fristen und wiederkehrende Pflichten aus dem Team-Cockpit — rechtzeitig, bevor es brennt.",
+    sec_eyebrow:"Sicherheit ist das Fundament", sec_h2:"Gebaut für sensible Postfächer.",
+    sec_p:"Deine Rohdaten verlassen die Box nie. Jede Schicht ist auf Zero-Trust ausgelegt — nicht nachträglich aufgesetzt.",
+    sc1_h:"PII-Strip lokal, vor dem LLM", sc1_p:"Ein lokales EU-Modell klassifiziert und neutralisiert Inhalte. Rohtexte verlassen deinen Server nicht.",
+    sc2_h:"Output-Render-Lockdown", sc2_p:"Schutz gegen Prompt-Injection (EchoLeak-Klasse): Plaintext-Rendering, strikte CSP, kein Auto-Image-Fetch.",
+    sc3_h:"Row-Level-Security in Postgres", sc3_p:"Mandanten-Isolation auf Datenbankebene erzwungen — gegen echte DB bewiesen, nicht nur konfiguriert.",
+    sc4_h:"Self-hosted in der EU", sc4_p:"Eigener gehärteter Server, EU-LLM (Mistral), verschlüsselte Token-Tabelle. Keine US-Cloud im Datenpfad.",
+    brg_eyebrow:"Für Unternehmen", brg_h2:"Sie wollen so etwas für Ihr Team?",
+    brg_p:"CogniMate ist unser Referenzprojekt — gebaut, um zu zeigen, was geht. Dieselbe Architektur entwickeln wir maßgeschneidert für Ihre Prozesse, Tools und Compliance.",
+    brg_b1t:"Maßgeschneidert statt Standard.", brg_b1:"Integration in Ihre bestehende Tool-Landschaft.",
+    brg_b2t:"EU & DSGVO im Kern.", brg_b2:"Self-hosting und Datenhoheit ohne Kompromisse.",
+    brg_b3t:"Human-in-the-loop by Design.", brg_b3:"KI, die vorschlägt — Menschen, die entscheiden.",
+    brg_stat1n:"6 Quellen", brg_stat1l:"in einer Vorschlags-Inbox vereint",
+    brg_stat2n:"1 Klick", brg_stat2l:"von Vorschlag zu erledigter Aufgabe",
+    brg_stat3n:"0 Rohdaten", brg_stat3l:"verlassen Ihre Infrastruktur",
+    brg_cta:"Projekt besprechen",
+    ct_eyebrow:"Kontakt", ct_h2:"Mit Vertrieb sprechen",
+    ct_p:"Erzählen Sie uns kurz von Ihrem Vorhaben. Wir melden uns innerhalb von zwei Werktagen für ein unverbindliches Erstgespräch.",
+    ct_r1:"Antwort in 2 Werktagen", ct_r2:"Unverbindliches Erstgespräch", ct_r3:"Vertraulich behandelt",
+    ct_f_name:"Name", ct_f_company:"Unternehmen", ct_f_email:"E-Mail", ct_f_msg:"Worum geht's?",
+    ct_ph_name:"Ihr Name", ct_ph_company:"Firma", ct_ph_email:"sie@firma.de", ct_ph_msg:"Kurz zu Ihrem Vorhaben, Team-Größe, eingesetzten Tools …",
+    ct_submit:"Anfrage senden", ct_note:"Wir nutzen Ihre Angaben nur zur Kontaktaufnahme.",
+    ct_sending:"Wird gesendet …", ct_ok:"Danke! Ihre Anfrage ist angekommen — wir melden uns in Kürze.", ct_err:"Da ging etwas schief. Bitte später erneut versuchen oder direkt per E-Mail.",
+    ct_nokey:"Formular noch nicht verbunden: Web3Forms-Access-Key fehlt.",
+    ft_copy:"© 2026 · Entwickelt von Dominik Siegers"
+  },
+  en:{
+    nav_how:"How it works", nav_features:"Features", nav_security:"Security", nav_services:"For companies", nav_cta:"Talk to sales",
+    hero_pill:"Human-in-the-loop · EU-hosted",
+    hero_h1a:"Your personal", hero_h1b:"AI Chief of Staff",
+    hero_lede:"CogniMate distills your inbox, meetings, calendar and CRM into concrete suggestions. You approve with one click — it never acts on its own.",
+    hero_cta1:"Talk to sales", hero_cta2:"How it works",
+    hero_m1:"GDPR-compliant", hero_m2:"EU LLM (Mistral)", hero_m3:"Self-hosted",
+    mock_title:"Triage — Today", mock_badge:"3 suggestions",
+    mock1_subj:"Quote for the Q3 roadmap", mock1_sum:"Asks for a reply by Friday. Draft ready — slot open in your calendar.",
+    mock_approve:"Approve", mock_edit:"Edit", mock_dismiss:"Dismiss", mock_review:"Review",
+    mock2_nm:"Granola · Meeting", mock2_co:"Sales sync", mock2_subj:"3 follow-ups detected",
+    mock2_sum:"Derived from the transcript — prepared as Linear tickets, assigned to you.",
+    trust1:"Row-Level Security from line 1", trust2:"Encrypted tokens", trust3:"EU data residency", trust4:"Output render lockdown",
+    how_eyebrow:"The backbone", how_h2:"Distill → Suggest → Approve → Act",
+    how_p:"Four steps, every day. CogniMate thinks ahead — the decision stays with you.",
+    step1_h:"Distill", step1_p:"Signals from inbox, meetings, calendar and CRM converge and get de-noised.",
+    step2_h:"Suggest", step2_p:"The noise becomes concrete suggestions: a reply draft, a task, a meeting, a reminder.",
+    step3_h:"Approve", step3_p:"You review and approve with one click — or adjust. Full control, always.",
+    step4_h:"Act & log", step4_p:"Nothing happens until you approve — and every step is logged transparently.",
+    feat_eyebrow:"One inbox for everything", feat_h2:"Every signal. One surface.",
+    feat_p:"CogniMate gathers six sources into a single suggestion inbox — instead of six tabs.",
+    f1_h:"Inbox triage", f1_p:"Microsoft 365 distilled: what matters rises, reply drafts included — straight from your mailbox.",
+    f2_h:"Meetings", f2_p:"Granola transcripts become follow-ups and summaries — nothing slips through.",
+    f3_h:"Calendar", f3_p:"Meetings in context: CogniMate sees when you're free and schedules suggestions realistically.",
+    f4_h:"CRM / HubSpot", f4_p:"Deals and contacts as signal — read-only via the shared connector, no double storage.",
+    f5_h:"Tasks (Linear)", f5_p:"Suggestions become tickets — the agent as delegate, you stay accountable.",
+    f6_h:"Reminders", f6_p:"Deadlines and recurring duties from the team cockpit — in time, before things burn.",
+    sec_eyebrow:"Security is the foundation", sec_h2:"Built for sensitive mailboxes.",
+    sec_p:"Your raw data never leaves the box. Every layer is designed zero-trust — not bolted on afterwards.",
+    sc1_h:"PII strip locally, before the LLM", sc1_p:"A local EU model classifies and neutralises content. Raw text never leaves your server.",
+    sc2_h:"Output render lockdown", sc2_p:"Protection against prompt injection (EchoLeak class): plaintext rendering, strict CSP, no auto image fetch.",
+    sc3_h:"Row-Level Security in Postgres", sc3_p:"Tenant isolation enforced at the database layer — proven against a real DB, not just configured.",
+    sc4_h:"Self-hosted in the EU", sc4_p:"Your own hardened server, EU LLM (Mistral), encrypted token table. No US cloud in the data path.",
+    brg_eyebrow:"For companies", brg_h2:"Want something like this for your team?",
+    brg_p:"CogniMate is our reference project — built to show what's possible. We develop the same architecture tailored to your processes, tools and compliance.",
+    brg_b1t:"Tailored, not off-the-shelf.", brg_b1:"Integrated into your existing tool landscape.",
+    brg_b2t:"EU & GDPR at the core.", brg_b2:"Self-hosting and data sovereignty without compromise.",
+    brg_b3t:"Human-in-the-loop by design.", brg_b3:"AI that suggests — people who decide.",
+    brg_stat1n:"6 sources", brg_stat1l:"unified into one suggestion inbox",
+    brg_stat2n:"1 click", brg_stat2l:"from suggestion to done",
+    brg_stat3n:"0 raw data", brg_stat3l:"leaves your infrastructure",
+    brg_cta:"Discuss a project",
+    ct_eyebrow:"Contact", ct_h2:"Talk to sales",
+    ct_p:"Tell us briefly about your plans. We'll get back to you within two business days for a no-obligation intro call.",
+    ct_r1:"Reply within 2 business days", ct_r2:"No-obligation intro call", ct_r3:"Treated confidentially",
+    ct_f_name:"Name", ct_f_company:"Company", ct_f_email:"Email", ct_f_msg:"What's it about?",
+    ct_ph_name:"Your name", ct_ph_company:"Company", ct_ph_email:"you@company.com", ct_ph_msg:"A bit about your plans, team size, tools in use …",
+    ct_submit:"Send request", ct_note:"We only use your details to get in touch.",
+    ct_sending:"Sending …", ct_ok:"Thanks! Your request came through — we'll be in touch shortly.", ct_err:"Something went wrong. Please try again later or email us directly.",
+    ct_nokey:"Form not connected yet: Web3Forms access key missing.",
+    ft_copy:"© 2026 · Built by Dominik Siegers"
+  }
+};
+
+let LANG = localStorage.getItem('cm_lang') || (navigator.language||'de').slice(0,2);
+if(!I18N[LANG]) LANG='de';
+
+function applyLang(lang){
+  LANG=lang; localStorage.setItem('cm_lang',lang);
+  document.documentElement.lang=lang;
+  const dict=I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if(dict[k]!=null) el.textContent=dict[k]; });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{ const k=el.getAttribute('data-i18n-placeholder'); if(dict[k]!=null) el.placeholder=dict[k]; });
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
+applyLang(LANG);
+
+/* ---------- theme ---------- */
+const root=document.documentElement;
+const savedTheme=localStorage.getItem('cm_theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+root.setAttribute('data-theme',savedTheme);
+document.getElementById('theme').addEventListener('click',()=>{
+  const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+  root.setAttribute('data-theme',next); localStorage.setItem('cm_theme',next);
+});
+
+/* ---------- mobile nav ---------- */
+const nav=document.getElementById('nav');
+document.getElementById('ham').addEventListener('click',()=>nav.classList.toggle('open'));
+nav.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+/* ---------- scroll reveal ---------- */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+/* ---------- contact form (Web3Forms AJAX) ---------- */
+const form=document.getElementById('contactForm');
+const msg=document.getElementById('formMsg');
+const submitBtn=document.getElementById('submitBtn');
+form.addEventListener('submit',async (e)=>{
+  e.preventDefault();
+  const dict=I18N[LANG];
+  const key=form.querySelector('[name=access_key]').value;
+  msg.className='form-msg';
+  if(!key || key.startsWith('REPLACE_WITH')){
+    msg.className='form-msg err'; msg.textContent=dict.ct_nokey; return;
+  }
+  const original=submitBtn.textContent;
+  submitBtn.textContent=dict.ct_sending; submitBtn.disabled=true;
+  try{
+    const data=Object.fromEntries(new FormData(form));
+    const res=await fetch('https://api.web3forms.com/submit',{
+      method:'POST', headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify(data)
+    });
+    const json=await res.json();
+    if(json.success){ msg.className='form-msg ok'; msg.textContent=dict.ct_ok; form.reset(); }
+    else{ msg.className='form-msg err'; msg.textContent=dict.ct_err; }
+  }catch(err){ msg.className='form-msg err'; msg.textContent=dict.ct_err; }
+  finally{ submitBtn.textContent=original; submitBtn.disabled=false; }
+});
+</script>
+</body>
+</html>
