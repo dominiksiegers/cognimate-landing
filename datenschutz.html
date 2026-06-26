@@ -70,6 +70,8 @@
   footer .brand-mark{width:24px;height:24px}
   footer .fr{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
   footer a{color:var(--muted)} footer a:hover{color:var(--ink);text-decoration:none}
+  .cookie-settings{border:none;background:transparent;color:var(--muted);font:inherit;font-size:14px;padding:0;cursor:pointer}
+  .cookie-settings:hover{color:var(--ink);text-decoration:underline}
 
   @media(max-width:680px){
     .card{padding:20px 18px}
@@ -101,7 +103,7 @@
     <p class="lede">Informationen zur Verarbeitung personenbezogener Daten auf cognimate.de gemäß DSGVO.</p>
 
     <div class="note">
-      <strong>Kurzfassung:</strong> Diese Website setzt <strong>keine Tracking-Cookies</strong> und <strong>keine Analyse-Tools</strong> ein. Personenbezogene Daten verarbeiten wir nur, wenn Sie uns über das Kontaktformular schreiben — sowie technisch notwendige Verbindungsdaten durch unseren Hoster.
+      <strong>Kurzfassung:</strong> Diese Website nutzt <strong>HubSpot</strong> für das Kontaktformular und die Reichweitenmessung. Analyse-Cookies werden erst nach Ihrer <strong>Einwilligung</strong> über den Cookie-Banner gesetzt; Ihre Auswahl können Sie jederzeit über „Cookie-Einstellungen" im Seitenfuß ändern.
     </div>
 
     <div class="card">
@@ -145,20 +147,21 @@
     </div>
 
     <div class="card">
-      <h2>5. Kontaktformular</h2>
+      <h2>5. Kontaktformular &amp; CRM (HubSpot)</h2>
       <p>Wenn Sie uns über das Kontaktformular eine Anfrage senden, verarbeiten wir die von Ihnen angegebenen Daten — <strong>Name, Unternehmen, E-Mail-Adresse und Ihre Nachricht</strong> — zum Zweck der Bearbeitung Ihrer Anfrage und einer möglichen Anschlusskommunikation.</p>
-      <p>Für die technische Übermittlung nutzen wir den Dienst <strong>Web3Forms</strong> (web3forms.com). Dieser nimmt die Formulardaten entgegen und leitet sie per E-Mail an uns weiter. Dabei werden die Daten an die Server des Anbieters übermittelt; eine Verarbeitung außerhalb der EU kann nicht ausgeschlossen werden.</p>
+      <p>Das Formular sowie unser Kundenbeziehungs-Management (CRM) werden über <strong>HubSpot</strong> betrieben. Anbieter ist die HubSpot, Inc., 2 Canal Park, Cambridge, MA 02141, USA; in der EU vertreten durch die HubSpot Ireland Limited, Dublin. Ihre Eingaben werden an HubSpot übermittelt und in unserem HubSpot-CRM gespeichert. Die Verarbeitung erfolgt im EU-Rechenzentrum von HubSpot; eine Übermittlung in die USA kann jedoch nicht ausgeschlossen werden. HubSpot ist unter dem <strong>EU-US Data Privacy Framework</strong> zertifiziert; ergänzend bestehen Standardvertragsklauseln. Mit HubSpot besteht ein Vertrag zur Auftragsverarbeitung.</p>
       <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen auf Ihre Anfrage hin) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der effizienten Bearbeitung von Anfragen). Die Daten werden gelöscht, sobald Ihre Anfrage abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
     </div>
 
     <div class="card">
-      <h2>6. Lokale Speicherung (Anzeige-Einstellungen)</h2>
-      <p>Zur Speicherung Ihrer Anzeige-Einstellungen (Hell-/Dunkel-Modus und Sprachauswahl) nutzen wir den lokalen Speicher Ihres Browsers (localStorage). Diese Informationen verbleiben ausschließlich auf Ihrem Gerät, werden <strong>nicht an uns übertragen</strong> und dienen allein der Funktion der Website. Sie sind technisch erforderlich im Sinne des § 25 Abs. 2 TDDDG; eine Einwilligung ist hierfür nicht notwendig.</p>
+      <h2>6. Webanalyse &amp; Cookies (HubSpot)</h2>
+      <p>Zur Analyse der Nutzung und zur Verbesserung unseres Angebots setzen wir die Analyse-Funktionen von <strong>HubSpot</strong> ein. Dabei werden u. a. Seitenaufrufe und Interaktionen erfasst und Cookies in Ihrem Browser gespeichert (z. B. <strong>__hstc</strong>, <strong>hubspotutk</strong>, <strong>__hssc</strong>, <strong>__hssrc</strong>).</p>
+      <p>Diese Analyse-Cookies werden <strong>erst gesetzt, nachdem Sie über unseren Cookie-Banner eingewilligt</strong> haben. Rechtsgrundlage ist Ihre Einwilligung (§ 25 Abs. 1 TDDDG i. V. m. Art. 6 Abs. 1 lit. a DSGVO). Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen oder anpassen — über die Schaltfläche <strong>„Cookie-Einstellungen"</strong> im Seitenfuß. Mit der Nutzung von HubSpot kann eine Datenübermittlung in die USA verbunden sein (siehe Abschnitt 5).</p>
     </div>
 
     <div class="card">
-      <h2>7. Keine Cookies, kein Tracking</h2>
-      <p>Wir verwenden keine Tracking- oder Marketing-Cookies, keine Web-Analyse-Dienste (z. B. Google Analytics) und keine Social-Media-Plugins. Ihr Surfverhalten wird nicht ausgewertet.</p>
+      <h2>7. Lokale Speicherung (Anzeige-Einstellungen)</h2>
+      <p>Zur Speicherung Ihrer Anzeige-Einstellungen (Hell-/Dunkel-Modus und Sprachauswahl) nutzen wir den lokalen Speicher Ihres Browsers (localStorage). Diese Informationen verbleiben ausschließlich auf Ihrem Gerät, werden <strong>nicht an uns übertragen</strong> und dienen allein der Funktion der Website. Sie sind technisch erforderlich im Sinne des § 25 Abs. 2 TDDDG; eine Einwilligung ist hierfür nicht notwendig.</p>
     </div>
 
     <div class="card">
@@ -177,6 +180,7 @@
       <a href="/">Startseite</a>
       <a href="/impressum.html">Impressum</a>
       <a href="/datenschutz.html">Datenschutz</a>
+      <button type="button" class="cookie-settings" onclick="(function(){var _hsp=window._hsp=window._hsp||[];_hsp.push(['showBanner']);})()">Cookie-Einstellungen</button>
     </div>
   </div>
 </footer>
@@ -190,5 +194,8 @@
     root.setAttribute('data-theme',next); localStorage.setItem('cm_theme',next);
   });
 </script>
+
+<!-- HubSpot Tracking Code (EU, Hub 144804770) -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/144804770.js"></script>
 </body>
 </html>

@@ -70,6 +70,8 @@
   footer .brand-mark{width:24px;height:24px}
   footer .fr{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
   footer a{color:var(--muted)} footer a:hover{color:var(--ink);text-decoration:none}
+  .cookie-settings{border:none;background:transparent;color:var(--muted);font:inherit;font-size:14px;padding:0;cursor:pointer}
+  .cookie-settings:hover{color:var(--ink);text-decoration:underline}
 
   @media(max-width:680px){
     .card{padding:22px 20px}
@@ -163,6 +165,7 @@
       <a href="/">Startseite</a>
       <a href="/impressum.html">Impressum</a>
       <a href="/datenschutz.html">Datenschutz</a>
+      <button type="button" class="cookie-settings" onclick="(function(){var _hsp=window._hsp=window._hsp||[];_hsp.push(['showBanner']);})()">Cookie-Einstellungen</button>
     </div>
   </div>
 </footer>
@@ -176,5 +179,8 @@
     root.setAttribute('data-theme',next); localStorage.setItem('cm_theme',next);
   });
 </script>
+
+<!-- HubSpot Tracking Code (EU, Hub 144804770) -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/144804770.js"></script>
 </body>
 </html>

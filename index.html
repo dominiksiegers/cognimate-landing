@@ -226,6 +226,36 @@
   .form-msg.ok{display:block;background:var(--teal);color:var(--teal-t)}
   .form-msg.err{display:block;background:var(--coral);color:var(--coral-t)}
 
+  /* ---------- HubSpot-Formular ans Design angleichen ---------- */
+  #hs-form-card{padding:28px}
+  #hubspot-form .hs-form-field{margin-bottom:15px}
+  #hubspot-form form>.hs-form-field:first-child{margin-top:0}
+  #hubspot-form label{display:block;font-size:13.5px;font-weight:650;margin-bottom:6px;color:var(--ink)}
+  #hubspot-form .hs-form-required{color:var(--coral-b);margin-left:2px}
+  #hubspot-form .hs-field-desc{font-size:12.5px;color:var(--muted);font-weight:400;margin:0 0 6px}
+  #hubspot-form .hs-input{width:100% !important;box-sizing:border-box;font-family:inherit;font-size:15px;color:var(--ink);
+    background:var(--bg) !important;border:1px solid var(--line) !important;border-radius:10px;padding:11px 13px;transition:.14s var(--ease)}
+  #hubspot-form textarea.hs-input{min-height:108px;resize:vertical}
+  #hubspot-form select.hs-input{appearance:none;-webkit-appearance:none}
+  #hubspot-form .hs-input:focus{outline:none;border-color:var(--accent) !important;box-shadow:var(--focus-ring)}
+  #hubspot-form .input{margin:0 !important}
+  #hubspot-form ul.inputs-list,#hubspot-form .legal-consent-container ul,#hubspot-form .hs-error-msgs{list-style:none;margin:6px 0 0;padding:0}
+  #hubspot-form .legal-consent-container ul{margin:0}
+  #hubspot-form .hs-error-msg,#hubspot-form label.hs-error-msg{color:var(--coral-b);font-size:12.5px;font-weight:500}
+  #hubspot-form .legal-consent-container{font-size:12.5px;color:var(--muted);margin:8px 0 16px}
+  #hubspot-form .legal-consent-container label{font-size:13px;font-weight:400;color:var(--muted);display:inline}
+  #hubspot-form .hs-form-booleancheckbox-display{display:flex;gap:8px;align-items:flex-start}
+  #hubspot-form .hs_submit{margin-top:6px}
+  #hubspot-form .hs-button{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid transparent;
+    background:var(--accent);color:var(--accent-ink);border-radius:11px;padding:13px 24px;font-size:16px;font-weight:600;font-family:inherit;
+    box-shadow:0 6px 18px rgba(83,74,183,.28);transition:.16s var(--ease)}
+  #hubspot-form .hs-button:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  #hubspot-form .submitted-message,#hubspot-form .hs-richtext{font-size:15px;color:var(--ink)}
+
+  /* Cookie-Einstellungen-Button (HubSpot Consent re-open) */
+  .cookie-settings{border:none;background:transparent;color:var(--muted);font:inherit;font-size:14px;padding:0;cursor:pointer}
+  .cookie-settings:hover{color:var(--ink);text-decoration:underline}
+
   /* ---------- footer ---------- */
   footer{padding:46px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
   footer .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
@@ -515,37 +545,9 @@
         </div>
       </div>
 
-      <form class="card" id="contactForm">
-        <!-- WICHTIG: access_key bei web3forms.com (kostenlos, nur E-Mail) holen und hier eintragen -->
-        <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_ACCESS_KEY">
-        <input type="hidden" name="subject" value="Neue CogniMate-Anfrage über die Landingpage">
-        <input type="hidden" name="from_name" value="CogniMate Landingpage">
-        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
-
-        <div class="frow">
-          <div class="field">
-            <label for="name" data-i18n="ct_f_name">Name</label>
-            <input id="name" name="name" type="text" required data-i18n-placeholder="ct_ph_name" placeholder="Ihr Name">
-          </div>
-          <div class="field">
-            <label for="company" data-i18n="ct_f_company">Unternehmen</label>
-            <input id="company" name="company" type="text" data-i18n-placeholder="ct_ph_company" placeholder="Firma">
-          </div>
-        </div>
-        <div class="field">
-          <label for="email" data-i18n="ct_f_email">E-Mail</label>
-          <input id="email" name="email" type="email" required data-i18n-placeholder="ct_ph_email" placeholder="sie@firma.de">
-        </div>
-        <div class="field">
-          <label for="message" data-i18n="ct_f_msg">Worum geht's?</label>
-          <textarea id="message" name="message" required data-i18n-placeholder="ct_ph_msg" placeholder="Kurz zu Ihrem Vorhaben, Team-Größe, eingesetzten Tools …"></textarea>
-        </div>
-        <div class="form-foot">
-          <button type="submit" class="btn primary lg" id="submitBtn" data-i18n="ct_submit">Anfrage senden</button>
-          <span class="form-note" data-i18n="ct_note">Wir nutzen Ihre Angaben nur zur Kontaktaufnahme.</span>
-        </div>
-        <div class="form-msg" id="formMsg"></div>
-      </form>
+      <div class="card" id="hs-form-card">
+        <div id="hubspot-form"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -561,6 +563,7 @@
       <a href="#contact" data-i18n="nav_cta">Kontakt</a>
       <a href="/impressum.html" data-i18n="ft_imprint">Impressum</a>
       <a href="/datenschutz.html" data-i18n="ft_privacy">Datenschutz</a>
+      <button type="button" class="cookie-settings" data-i18n="ft_cookies" onclick="(function(){var _hsp=window._hsp=window._hsp||[];_hsp.push(['showBanner']);})()">Cookie-Einstellungen</button>
     </div>
   </div>
 </footer>
@@ -618,7 +621,7 @@ const I18N = {
     ct_submit:"Anfrage senden", ct_note:"Wir nutzen Ihre Angaben nur zur Kontaktaufnahme.",
     ct_sending:"Wird gesendet …", ct_ok:"Danke! Ihre Anfrage ist angekommen — wir melden uns in Kürze.", ct_err:"Da ging etwas schief. Bitte später erneut versuchen oder direkt per E-Mail.",
     ct_nokey:"Formular noch nicht verbunden: Web3Forms-Access-Key fehlt.",
-    ft_copy:"© 2026 · CogniCore IT Solutions GmbH", ft_imprint:"Impressum", ft_privacy:"Datenschutz"
+    ft_copy:"© 2026 · CogniCore IT Solutions GmbH", ft_imprint:"Impressum", ft_privacy:"Datenschutz", ft_cookies:"Cookie-Einstellungen"
   },
   en:{
     nav_how:"How it works", nav_features:"Features", nav_security:"Security", nav_services:"For companies", nav_cta:"Talk to sales",
@@ -670,7 +673,7 @@ const I18N = {
     ct_submit:"Send request", ct_note:"We only use your details to get in touch.",
     ct_sending:"Sending …", ct_ok:"Thanks! Your request came through — we'll be in touch shortly.", ct_err:"Something went wrong. Please try again later or email us directly.",
     ct_nokey:"Form not connected yet: Web3Forms access key missing.",
-    ft_copy:"© 2026 · CogniCore IT Solutions GmbH", ft_imprint:"Imprint", ft_privacy:"Privacy"
+    ft_copy:"© 2026 · CogniCore IT Solutions GmbH", ft_imprint:"Imprint", ft_privacy:"Privacy", ft_cookies:"Cookie settings"
   }
 };
 
@@ -708,32 +711,20 @@ const io=new IntersectionObserver((entries)=>{
 },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
 
-/* ---------- contact form (Web3Forms AJAX) ---------- */
-const form=document.getElementById('contactForm');
-const msg=document.getElementById('formMsg');
-const submitBtn=document.getElementById('submitBtn');
-form.addEventListener('submit',async (e)=>{
-  e.preventDefault();
-  const dict=I18N[LANG];
-  const key=form.querySelector('[name=access_key]').value;
-  msg.className='form-msg';
-  if(!key || key.startsWith('REPLACE_WITH')){
-    msg.className='form-msg err'; msg.textContent=dict.ct_nokey; return;
-  }
-  const original=submitBtn.textContent;
-  submitBtn.textContent=dict.ct_sending; submitBtn.disabled=true;
-  try{
-    const data=Object.fromEntries(new FormData(form));
-    const res=await fetch('https://api.web3forms.com/submit',{
-      method:'POST', headers:{'Content-Type':'application/json',Accept:'application/json'},
-      body:JSON.stringify(data)
-    });
-    const json=await res.json();
-    if(json.success){ msg.className='form-msg ok'; msg.textContent=dict.ct_ok; form.reset(); }
-    else{ msg.className='form-msg err'; msg.textContent=dict.ct_err; }
-  }catch(err){ msg.className='form-msg err'; msg.textContent=dict.ct_err; }
-  finally{ submitBtn.textContent=original; submitBtn.disabled=false; }
-});
+</script>
+
+<!-- HubSpot Tracking Code (EU, Hub 144804770) -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/144804770.js"></script>
+
+<!-- HubSpot Formular (EU) -->
+<script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
+<script>
+  hbspt.forms.create({
+    portalId: "144804770",
+    formId: "00ff90f7-9cab-45b0-a2bf-84073eb186fe",
+    region: "eu1",
+    target: "#hubspot-form"
+  });
 </script>
 </body>
 </html>
